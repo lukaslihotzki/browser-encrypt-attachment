@@ -68,7 +68,8 @@ function decryptAttachment(ciphertextBuffer, info) {
     }
 
     var cryptoKey; // The AES key object.
-    var ivArray = decodeBase64(info.iv);
+    var ivArray = new Uint8Array(16);
+    ivArray.set(decodeBase64(info.iv));
     var expectedSha256base64 = info.hashes.sha256;
     // Load the AES from the "key" key of the info object.
     return window.crypto.subtle.importKey(
